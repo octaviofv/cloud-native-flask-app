@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Random Quote Generator</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Random Quote Generator</h1>
+    <div id="quote-container">
+        <p id="quote-text"></p>
+        <p id="quote-author"></p>
+        <p id="quote-genre"></p>
+    </div>
+    <button id="new-quote-btn">Get New Quote</button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    var newQuoteBtn = document.getElementById('new-quote-btn');
+    var quoteText = document.getElementById('quote-text');
+    var quoteAuthor = document.getElementById('quote-author');
+    var quoteGenre = document.getElementById('quote-genre');
+
+    newQuoteBtn.addEventListener('click', function() {
+        fetch('/quote')
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(data) {
+                if (data.error) {
+                    console.error(data.error);
+                } else {
+                    quoteText.textContent = 'Quote: ' + data.quote;
+                    quoteAuthor.textContent = 'Author: ' + data.author;
+                    quoteGenre.textContent = 'Genre: ' + data.genre;
+                }
+            })
+            .catch(function(error) {
+                console.error('Failed to fetch quote:', error);
+            });
+    });
+
+    // Fetch initial quote
+    newQuoteBtn.click();
+});
+
+    </script>
+</body>
+</html>

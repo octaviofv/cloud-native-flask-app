@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quote of the Day</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Quote of the Day</h1>
+    <div id="quote-container">
+        <p id="quote-text">Quote: {{ quote_of_the_day['quote'] }}</p>
+        <p id="quote-author">Author: {{ quote_of_the_day['author'] }}</p>
+        <p id="quote-genre">Genre: {{ quote_of_the_day['genre'] }}</p>
+    </div>
+</body>
+</html>
