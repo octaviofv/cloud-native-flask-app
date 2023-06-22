@@ -15,12 +15,14 @@ def random_quote_generator():
 @app.route('/qotd')
 def quote_of_the_day():
     # Get the quote of the day from the session
+    current_date = datetime.date.today().strftime("%Y-%m-%d")
     quote_of_the_day = session.get('quote_of_the_day')
 
-    # If the quote of the day is not stored in the session, fetch it
-    if quote_of_the_day is None:
+    # If the quote of the day is not stored in the session or if the stored quote is from a different day, fetch a new quote
+    if quote_of_the_day is None or session.get('quote_date') != current_date:
         quote_of_the_day = fetch_quote_of_the_day()
         session['quote_of_the_day'] = quote_of_the_day
+        session['quote_date'] = current_date
 
     # Render the 'qotd.html' template with the quote of the day
     return render_template('qotd.html', quote_of_the_day=quote_of_the_day)
