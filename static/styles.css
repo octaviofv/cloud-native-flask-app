@@ -29,7 +29,7 @@ body {
     color: #888;
   }
   
-  #new-quote-btn {
+  button {
     background-color: #4caf50;
     color: #fff;
     padding: 10px 20px;
@@ -37,7 +37,7 @@ body {
     cursor: pointer;
   }
   
-  #new-quote-btn:hover {
+  button:hover {
     background-color: #45a049;
   }
   
